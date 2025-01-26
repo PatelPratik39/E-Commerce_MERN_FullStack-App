@@ -167,3 +167,6 @@ export const refreshToken = async (req, res) => {
       .json({ message: "Server error", error: error.message });
   }
 };
+
+// todo : implemnt get Prodile
+// export const getProfile = async (req, res) => {};

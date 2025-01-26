@@ -2,4 +2,4 @@
 
 # upStash for redis :https://console.upstash.com/
 
-![image](./redis_token.png)
+![image](./redis_tokens.png)
