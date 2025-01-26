@@ -2,8 +2,10 @@
   "name": "e-commerce_mern_fullstack-app",
   "version": "1.0.0",
   "description": "E-Commerce Full Stack App",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
+    "dev":"nodemon backend/server.js",
+    "start":"node backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,6 +13,7 @@
     "url": "git+https://github.com/PatelPratik39/E-Commerce_MERN_FullStack-App.git"
   },
   "keywords": [],
+  "type": "module",
   "author": "Pratik Patel",
   "license": "ISC",
   "bugs": {
