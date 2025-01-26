@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.get("/", protectedRoute, adminRoute, getAllProducts);
 router.get("/featured", getFeaturedProducts);
+router.get("/", protectedRoute, adminRoute, createProject);
 
 export default router;
