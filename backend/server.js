@@ -5,8 +5,8 @@ import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cart.route.js";
 import couponRoutes from "./routes/coupon.route.js";
-import paymentsRoutes from "./routes/payments.route.js"
-import analyticsRoutes from "./routes/analytics.route.js"
+import paymentsRoutes from "./routes/payments.route.js";
+import analyticsRoutes from "./routes/analytics.route.js";
 
 import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser";
