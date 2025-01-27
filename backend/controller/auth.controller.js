@@ -169,4 +169,13 @@ export const refreshToken = async (req, res) => {
 };
 
 // todo : implemnt get Prodile
-// export const getProfile = async (req, res) => {};
+export const getProfile = async (req, res) => {
+  try {
+    res.json(req.user);
+  } catch (error) {
+    console.log("Error in get Profile conroller", error.message);
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
+  }
+};
