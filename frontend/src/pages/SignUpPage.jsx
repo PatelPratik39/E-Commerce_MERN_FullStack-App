@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const SignUpPage = () => {
-  const loading = true;
+  const loading = false;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -182,6 +182,7 @@ const SignUpPage = () => {
                   </>
                 )}
               </button>
+              
             </form>
 
             <p className="mt-8 text-center text-sm text-gray-400">
