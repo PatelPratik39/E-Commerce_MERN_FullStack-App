@@ -30,63 +30,37 @@ export const getAnalyticsData = async (req, res) => {
 };
 
 export const getDailySalesData = async (startDate, endDate) => {
-  const dailySalesData = await Order.aggregate([
-    {
-      $match: {
-        createdAt: {
-          $gte: startDate,
-          $lte: endDate
+  try {
+    const dailySalesData = await Order.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: startDate,
+            $lte: endDate
+          }
         }
-      }
-    },
-    {
-      $group: {
-        _id: { $dateToString: { format: "%Y-%m-%d", date: $createdAt } },
-        sales: { $sum: 1 },
-        revenue: { $sum: $totalAmount }
-      }
-    },
-    { $sort: { _id: 1 } }
-  ]);
-
-  //   example of daily sales data
-  //   [
-  //     {
-  //       _id: "2025-01-19",
-  //       sales: 12,
-  //       revenue: 1450.75
-  //     },
-  //     {
-  //       _id: "2025-01-19",
-  //       sales: 2,
-  //       revenue: 140.75
-  //     },
-  //     {
-  //       _id: "2025-01-19",
-  //       sales: 2,
-  //       revenue: 50.75
-  //     },
-  //     {
-  //       _id: "2025-01-19",
-  //       sales: 2,
-  //       revenue: 150.75
-  //     },
-  //     {
-  //       _id: "2025-01-19",
-  //       sales: 2,
-  //       revenue: 1450.75
-  //     }
-  //   ];
-
-  const dateArray = getDatesInRange(startDate, endDate);
-  return dateArray.map((date) => {
-    const foundData = dailySalesData.find((item) => item._id === date);
-    return {
-      date,
-      sales: foundData?.sales || 0,
-      revenue: foundData?.revenue || 0
-    };
-  });
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: $createdAt } },
+          sales: { $sum: 1 },
+          revenue: { $sum: $totalAmount }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+    const dateArray = getDatesInRange(startDate, endDate);
+    return dateArray.map((date) => {
+      const foundData = dailySalesData.find((item) => item._id === date);
+      return {
+        date,
+        sales: foundData?.sales || 0,
+        revenue: foundData?.revenue || 0
+      };
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 function getDatesInRange(startDate, endDate) {
   const dates = [];
