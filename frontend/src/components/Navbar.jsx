@@ -2,7 +2,7 @@ import React from "react";
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const user = true;
+  const user = false;
   const isAdmin = true;
   return (
     <>
@@ -15,20 +15,32 @@ const Navbar = () => {
             >
               E-Commerce
             </Link>
+
             <nav className="flex flex-wrap items-center gap-4">
-              <Link to={"/"}>Home</Link>
+              <Link
+                to={"/"}
+                className="text-gray-300 hover:text-emerald-400 transition duration-300
+					 ease-in-out"
+              >
+                Home
+              </Link>
               {user && (
-                <Link to={"/cart"} className="relative group">
+                <Link
+                  to={"/cart"}
+                  className="relative group text-gray-300 hover:text-emerald-400 transition duration-300 
+							ease-in-out"
+                >
                   <ShoppingCart
                     className="inline-block mr-1 group-hover:text-emerald-400"
                     size={20}
                   />
                   <span className="hidden sm:inline">Cart</span>
+
                   <span
                     className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 
 									text-xs group-hover:bg-emerald-400 transition duration-300 ease-in-out"
                   >
-                    3
+                    3 {/* {cart.length} */}
                   </span>
                 </Link>
               )}
@@ -42,14 +54,15 @@ const Navbar = () => {
                   <span className="hidden sm:inline">Dashboard</span>
                 </Link>
               )}
+
               {user ? (
                 <button
                   className="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 
 						rounded-md flex items-center transition duration-300 ease-in-out"
-                  
+                  //   onClick={logout}
                 >
                   <LogOut size={18} />
-                  <span className="hidden sm:inline ml-2"></span>
+                  <span className="hidden sm:inline ml-2">Log Out</span>
                 </button>
               ) : (
                 <>
