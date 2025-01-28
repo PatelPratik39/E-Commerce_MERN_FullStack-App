@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -6,14 +6,18 @@ import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useStore";
 import { useEffect } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
-  const { user, checkAuth } = useUserStore();
+  const { user, checkAuth, checkingAuth } = useUserStore();
 
   // when we are loggedin , we will remain on same page using profile endpoint and below useEffect hook
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  // loading spinner
+  if (checkingAuth) return <LoadingSpinner />;
 
   return (
     <>
@@ -28,10 +32,13 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/signup" element={<SignUpPage />} />
+            <Route
+              path="/signup"
+              element={!user ? <SignUpPage /> : <Navigate to="/" />}
+            />
             <Route
               path="/login"
-              element={user ? <HomePage /> : <LoginPage />}
+              element={!user ? <LoginPage /> : <Navigate to="/" />}
             />
             {/* <Route path="/" element={<HomePage />} /> */}
           </Routes>
