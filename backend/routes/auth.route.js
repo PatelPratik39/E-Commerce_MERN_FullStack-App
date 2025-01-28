@@ -18,6 +18,6 @@ router.post("/logout", logout);
 
 router.post("/refresh-token", refreshToken);
 
-router.post("/profile", protectedRoute, getProfile);
+router.get("/profile", protectedRoute, getProfile);
 
 export default router;

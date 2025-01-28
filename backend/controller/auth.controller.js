@@ -210,7 +210,7 @@ export const refreshToken = async (req, res) => {
   }
 };
 
-// todo : implemnt get Prodile
+// :implemnt get Prodile
 export const getProfile = async (req, res) => {
   try {
     res.json(req.user);

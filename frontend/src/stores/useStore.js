@@ -38,7 +38,15 @@ export const useUserStore = create((set, get) => ({
         error.response?.data?.message || "An error occurred, please try again!";
       toast.error(errorMessage);
     }
-  }
+  },
 
-  //   signup: async () => {}
+  checkAuth: async () => {
+    set({ checkingAuth: true });
+    try {
+      const response = await axios.get("/auth/profile");
+      set({ user: response.data, checkingAuth: false });
+    } catch (error) {
+      set({ checkingAuth: false, user: null });
+    }
+  }
 }));

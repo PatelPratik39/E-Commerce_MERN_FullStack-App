@@ -5,9 +5,16 @@ import SignUpPage from "./pages/SignUpPage";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { useUserStore } from "./stores/useStore";
+import { useEffect } from "react";
 
 function App() {
-  const { user } = useUserStore();
+  const { user, checkAuth } = useUserStore();
+
+  // when we are loggedin , we will remain on same page using profile endpoint and below useEffect hook
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <>
       <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -22,7 +29,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/login" element={user ? <HomePage /> : <LoginPage />} />
+            <Route
+              path="/login"
+              element={user ? <HomePage /> : <LoginPage />}
+            />
             {/* <Route path="/" element={<HomePage />} /> */}
           </Routes>
         </div>
