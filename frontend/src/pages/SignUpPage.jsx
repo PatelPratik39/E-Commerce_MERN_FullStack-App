@@ -5,14 +5,13 @@ import { useState } from "react";
 import { useUserStore } from "../stores/useStore";
 
 const SignUpPage = () => {
-  const loading = false;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
   });
-  const { signup, user } = useUserStore();
+  const { signup, loading } = useUserStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();

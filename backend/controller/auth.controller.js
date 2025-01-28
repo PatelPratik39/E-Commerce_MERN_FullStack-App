@@ -72,29 +72,71 @@ export const signup = async (req, res) => {
 
 // Login
 
+// export const login = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({ email });
+//     if (user && (await user.comparePassword(password))) {
+//       const { accessToken, refreshToken } = generateTokens(user._id);
+
+//       await storeRefreshToken(user._id, refreshToken);
+//       setCookies(res, accessToken, refreshToken);
+
+//       res.json({
+//         _id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         role: user.role,
+//         message: "Login successfull ✅"
+//       });
+//     }
+//   } catch (error) {
+//     console.log("Error in Login Controller", error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Find user in database
     const user = await User.findOne({ email });
-    if (user && (await user.comparePassword(password))) {
-      const { accessToken, refreshToken } = generateTokens(user._id);
 
-      await storeRefreshToken(user._id, refreshToken);
-      setCookies(res, accessToken, refreshToken);
-
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        message: "Login successfull ✅"
-      });
+    // If user does not exist, return 404
+    if (!user) {
+      return res.status(404).json({ message: "User not found ❌" });
     }
+
+    // Check if password is correct
+    const isPasswordValid = await user.comparePassword(password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Incorrect password ❌" });
+    }
+
+    // Generate tokens
+    const { accessToken, refreshToken } = generateTokens(user._id);
+
+    // Store refresh token and set cookies
+    await storeRefreshToken(user._id, refreshToken);
+    setCookies(res, accessToken, refreshToken);
+
+    // Return success response
+    return res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      message: "Login successful ✅"
+    });
   } catch (error) {
-    console.log("Error in Login Controller", error.message);
-    res.status(500).json({ message: error.message });
+    console.error("Error in Login Controller:", error.message);
+    return res
+      .status(500)
+      .json({ message: "Server error, please try again later." });
   }
 };
+
 
 export const logout = async (req, res) => {
   try {

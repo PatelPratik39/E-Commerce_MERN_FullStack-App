@@ -4,8 +4,10 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
+import { useUserStore } from "./stores/useStore";
 
 function App() {
+  const { user } = useUserStore();
   return (
     <>
       <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -20,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={user ? <HomePage /> : <LoginPage />} />
             {/* <Route path="/" element={<HomePage />} /> */}
           </Routes>
         </div>
