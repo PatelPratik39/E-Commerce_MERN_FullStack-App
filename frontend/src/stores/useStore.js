@@ -30,6 +30,7 @@ export const useUserStore = create((set, get) => ({
     try {
       const res = await axios.post("/auth/login", { email, password });
       console.log("User is here", res.data);
+      localStorage.setItem("accessToken", res.data.accessToken); // Store token
       set({ user: res.data, loading: false });
       toast.success(res.data.message); // Show success message from backend
     } catch (error) {
