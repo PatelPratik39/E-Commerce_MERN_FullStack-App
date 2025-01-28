@@ -1,6 +1,21 @@
-import React from 'react'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
+
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const loading = false
+
+  // const { login, loading } = useUserStore();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    // login(email, password);
+  };
   return (
     <>
       <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -85,7 +100,7 @@ const LoginPage = () => {
 							rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600
 							 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2
 							  focus:ring-emerald-500 transition duration-150 ease-in-out disabled:opacity-50"
-                disabled={loading}
+                // disabled={loading}
               >
                 {loading ? (
                   <>
@@ -118,6 +133,6 @@ const LoginPage = () => {
       </div>
     </>
   );
-}
+};
 
-export default LoginPage
+export default LoginPage;
