@@ -9,14 +9,20 @@ import { useEffect } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
+  const {getCartItems} = useCartStore();
 
   // when we are loggedin , we will remain on same page using profile endpoint and below useEffect hook
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    getCartItems();
+  }, [getCartItems]);
 
   // loading spinner
   if (checkingAuth) return <LoadingSpinner />;
@@ -53,6 +59,10 @@ function App() {
               }
             />
             <Route path="/category/:category" element={<CategoryPage />} />
+            <Route
+              path="/cart"
+              element={user ? <CartPage /> : <Navigate to="login" />}
+            />
           </Routes>
         </div>
         <Toaster />
@@ -60,5 +70,6 @@ function App() {
     </>
   );
 }
+import { useCartStore } from "./stores/useCartStore";
 
 export default App;
