@@ -37,7 +37,7 @@ export const getFeaturedProducts = async (req, res) => {
   }
 };
 
-export const createProject = async (req, res) => {
+export const createProduct = async (req, res) => {
   try {
     const { name, description, price, image, category, isFeatured } = req.body;
     let cloudinaryResponse = null;
