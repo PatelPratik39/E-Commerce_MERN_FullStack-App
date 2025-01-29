@@ -5,3 +5,6 @@
 * Strip for payment : https://dashboard.stripe.com/test/dashboard
 
 ![image](./redis_tokens.png)
+![image](./featured_toggle1.png)
+![image](./featured_toggle2.png)
+![image](./emptyCart.png)
