@@ -2,9 +2,11 @@ import React from "react";
 import toast from "react-hot-toast";
 import { ShoppingCart } from "lucide-react";
 import { useUserStore } from "../stores/useStore.js";
+import { useCartStore } from "../stores/useCartStore.js";
 
 const ProductCard = ({ product }) => {
   const { user } = useUserStore();
+  const { addToCart } = useCartStore();
 
   const handleAddToCart = () => {
     if (!user) {
@@ -12,8 +14,8 @@ const ProductCard = ({ product }) => {
       return;
     } else {
       // add to cart
-      // addToCart(product);
-      toast.success("Added to cart", { id: "login" });  // using id , i can avoid multiple toast render
+      addToCart(product);
+    //   toast.success("Added to cart", { id: "login" }); // using id , i can avoid multiple toast render
     }
   };
 
