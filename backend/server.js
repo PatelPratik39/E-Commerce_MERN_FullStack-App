@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cart.route.js";
@@ -12,6 +13,14 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // ✅ Allow frontend requests
+    credentials: true, // ✅ Allow cookies for auth
+    methods: ["GET", "POST", "PATCH", "DELETE"] // ✅ Allow only required methods
+  })
+);
 
 app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
