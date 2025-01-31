@@ -67,7 +67,7 @@ export const useCartStore = create((set, get) => ({
   addToCart: async (product) => {
     try {
       await axiosInstance.post("/cart", { productId: product._id });
-      toast.success("Product added to cart");
+      toast.success("Product added to cart ");
 
       set((prevState) => {
         const existingItem = prevState.cart.find(
@@ -149,7 +149,8 @@ export const useCartStore = create((set, get) => ({
       0
     );
     let total = subtotal;
-
+    console.log("Total Subtotal : ", total);
+    
     if (coupon) {
       const discount = subtotal * (coupon.discountPercentage / 100);
       total = subtotal - discount;
