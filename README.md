@@ -21,5 +21,5 @@
 - Success Payment Page
 ![image](./purchaseSuccess.png)
 
-- Cancle Purchase Page
-![image](./purchaseCancel.png)
+- Cancel Purchase Page
+![image](./purchasCancel.png)
