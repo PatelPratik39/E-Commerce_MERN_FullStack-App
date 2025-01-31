@@ -23,6 +23,10 @@ export const useCartStore = create((set, get) => ({
     }
   },
 
+  clearCart: async () => {
+    set({ cart: [], coupon: null, total: 0, subtotal: 0 });
+  },
+
   // addToCart: async (product) => {
   //   try {
   //     console.log("Adding to cart:", product._id);
@@ -68,7 +72,7 @@ export const useCartStore = create((set, get) => ({
   addToCart: async (product) => {
     try {
       await axiosInstance.post("/cart", { productId: product._id });
-      toast.success("Product added to cart ");
+      toast.success("Product added to cart ✅");
 
       set((prevState) => {
         const existingItem = prevState.cart.find(
@@ -85,7 +89,7 @@ export const useCartStore = create((set, get) => ({
       });
       get().calculateTotals();
     } catch (error) {
-      toast.error(error.response.data.message || "An error occurred");
+      toast.error(error.response.data.message || "An Error occurred ");
     }
   },
 
@@ -134,7 +138,6 @@ export const useCartStore = create((set, get) => ({
         }));
         get().calculateTotals();
         // console.log("Calculate total : ", get().calculateTotals());
-        
       } else {
         console.error("Failed to update quantity:", response);
       }
@@ -151,7 +154,7 @@ export const useCartStore = create((set, get) => ({
     );
     let total = subtotal;
     console.log("Total Subtotal : ", total);
-    
+
     if (coupon) {
       const discount = subtotal * (coupon.discountPercentage / 100);
       total = subtotal - discount;

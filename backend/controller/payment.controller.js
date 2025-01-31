@@ -7,6 +7,10 @@ dotenv.config();
 
 export const createCheckoutSession = async (req, res) => {
   try {
+    // ✅ Ensure user is authenticated
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized. User not found." });
+    }
     const { products, couponCode } = req.body;
     if (!Array.isArray(products) || products.length === 0) {
       return res.status(400).json({ error: "Invalid or empty products array" });
@@ -24,7 +28,8 @@ export const createCheckoutSession = async (req, res) => {
             images: [product.image]
           },
           unit_amount: amount
-        }
+        },
+        quantity: product.quantity || 1
       };
     });
 
@@ -56,7 +61,7 @@ export const createCheckoutSession = async (req, res) => {
         : [],
       // metadata
       metadata: {
-        userId: req.user._id.toString(),
+        userId: req.user._id?.toString() || "",
         couponCode: couponCode || " ",
         products: JSON.stringify(
           products.map((p) => ({
@@ -71,7 +76,13 @@ export const createCheckoutSession = async (req, res) => {
     if (totalAmount >= 20000) {
       await createNewCoupon(req.user._id);
     }
-    res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 });
+    console.log("🟢 Sending Checkout Session Response:", session);
+
+    // res.json({ session });
+    // res.status(200).json({ session: { id: session.id } });
+    res.status(200).json({ session: session, totalAmount: totalAmount / 100 });
+
+    // res.status(200).json({ id: session.id, totalAmount: totalAmount / 100 });
   } catch (error) {
     console.log("Error processing checkout :", error);
     res.status(500).json({
@@ -83,9 +94,25 @@ export const createCheckoutSession = async (req, res) => {
 
 export const checkoutSuccess = async (req, res) => {
   try {
+    console.log("🔹 Incoming request to /checkout-success");
     const { sessionId } = req.body;
+
+    if (!sessionId) {
+      console.log("❌ Missing session ID");
+      return res.status(400).json({ error: "Missing session ID 🔴" });
+    }
+
+    console.log(`✅ Retrieving Stripe session for sessionId: ${sessionId}`);
     const session = await stripe.checkout.sessions.retrieve(sessionId);
-    if (session.payment_status === "paid") {
+    console.log("✅ Stripe Session Retrieved:", session);
+
+    // ✅ Ensure metadata exists before accessing properties
+    if (!session.metadata) {
+      return res.status(400).json({ error: "Missing metadata in session" });
+    }
+
+    if (!session || session.payment_status === "paid") {
+      console.log("❌ Invalid Stripe session");
       if (session.metadata.couponCode) {
         await Coupon.findOneAndUpdate(
           {
@@ -97,7 +124,14 @@ export const checkoutSuccess = async (req, res) => {
           }
         );
       }
-      //   create a new order
+      // ✅ Ensure `products` metadata exists
+      if (!session.metadata.products) {
+        return res
+          .status(400)
+          .json({ error: "Missing products data in session" });
+      }
+
+      // ✅ Parse and create order
       const products = JSON.parse(session.metadata.products);
       const newOrder = new Order({
         user: session.metadata.userId,
