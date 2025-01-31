@@ -7,8 +7,16 @@
 - accessToken and refreshToken using Jwt
 ![image](./redis_tokens.png)
 -   Toggle option for featured Items
+
+-  Home Page
+![image](./homePage.png)
+
 ![image](./featured_toggle1.png)
 
 ![image](./featured_toggle2.png)
+
 - Empty Cart UI
 ![image](./emptyCart.png)
+
+- Success Payment Page
+![image](./successPage.png)

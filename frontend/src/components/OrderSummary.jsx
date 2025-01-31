@@ -6,8 +6,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "../lib/axios";
 
 
+// const stripePromise = loadStripe(
+//   "YOUR STRIP KEY"
+// );
 const stripePromise = loadStripe(
-  "YOUR STRIP KEY"
+  "pk_test_51PDEcrCdn0HlYtcbafQKHoJTq4csJHjLZ9qYUGi08MoVaAozSbyRmi2QyCf1z02fL8sl0MkAmORyueprc8bNNYfB009lu2hpGB"
 );
 
 console.log("Stripe Key:", stripePromise);
