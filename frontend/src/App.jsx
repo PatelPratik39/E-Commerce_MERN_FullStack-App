@@ -13,7 +13,7 @@ import CartPage from "./pages/CartPage";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
-  const {getCartItems} = useCartStore();
+  const { getCartItems } = useCartStore();
 
   // when we are loggedin , we will remain on same page using profile endpoint and below useEffect hook
   useEffect(() => {
@@ -21,8 +21,9 @@ function App() {
   }, [checkAuth]);
 
   useEffect(() => {
+    if (!user) return;
     getCartItems();
-  }, [getCartItems]);
+  }, [getCartItems, user]);
 
   // loading spinner
   if (checkingAuth) return <LoadingSpinner />;

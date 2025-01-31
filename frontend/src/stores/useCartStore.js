@@ -8,6 +8,7 @@ export const useCartStore = create((set, get) => ({
   coupon: null,
   total: 0,
   subTotal: 0,
+  isCouponApplied: false,
 
   getCartItems: async () => {
     try {
@@ -99,7 +100,7 @@ export const useCartStore = create((set, get) => ({
 
   updateQuantity: async (productId, quantity) => {
     try {
-      console.log("Quantity Hit");
+      // console.log("Quantity Hit");
       console.log("Updating quantity for:", productId, "to", quantity);
       console.log(
         "Using axiosInstance with Base URL:",
