@@ -13,19 +13,20 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // ✅ Allow frontend requests
-    credentials: true, // ✅ Allow cookies for auth
-    methods: ["GET", "POST", "PATCH", "DELETE"] // ✅ Allow only required methods
+    origin: "http://localhost:5173", // ✅ Allow frontend
+    credentials: true, // ✅ Required for authentication cookies
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 
+// app.use(cors());
 app.use(express.json({ limit: "20mb" }));
 app.use(cookieParser());
-
-const PORT = process.env.PORT || 6001;
 
 // Authentication
 

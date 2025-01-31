@@ -213,6 +213,8 @@ export const refreshToken = async (req, res) => {
 // :implemnt get Prodile
 export const getProfile = async (req, res) => {
   try {
+    console.log(req.user);
+    
     res.json(req.user);
   } catch (error) {
     console.log("Error in get Profile conroller", error.message);

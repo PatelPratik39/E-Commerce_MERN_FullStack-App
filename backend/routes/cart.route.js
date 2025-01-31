@@ -3,7 +3,7 @@ import {
   addToCart,
   getCartProducts,
   removeAllFromCart,
-  updateQunatity
+  updateQuantity
 } from "../controller/cart.controller.js";
 import { protectedRoute } from "../middleware/auth.middleware.js";
 
@@ -12,6 +12,6 @@ const router = express.Router();
 router.get("/", protectedRoute, getCartProducts);
 router.post("/", protectedRoute, addToCart);
 router.delete("/", protectedRoute, removeAllFromCart);
-router.put("/:id", protectedRoute, updateQunatity);
+router.put("/:id", protectedRoute, updateQuantity);
 
 export default router;

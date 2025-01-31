@@ -113,7 +113,7 @@ export const getRecommendedProducts = async (req, res) => {
 };
 
 export const fetchProductsByCategory = async (req, res) => {
-  console.log("Category API Hit:", req.params.category);
+  // console.log("Category API Hit:", req.params.category);
   const category = req.params.category;
   try {
     const products = await Product.find({ category }); 
