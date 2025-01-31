@@ -19,4 +19,4 @@
 ![image](./emptyCart.png)
 
 - Success Payment Page
-![image](./successPage.png)
+![image](./purchaseSuccess.png)
