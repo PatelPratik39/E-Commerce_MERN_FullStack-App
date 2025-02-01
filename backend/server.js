@@ -16,12 +16,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
-app.use(
-  cors({
-    origin: ["https://e-commerce-mern-fullstack-app.onrender.com"],
-    credentials: true
-  })
-);
+
+// app.use(
+//   cors({
+//     origin: ["https://e-commerce-mern-fullstack-app.onrender.com"],
+//     credentials: true
+//   })
+// );
 
 
 // app.use(
