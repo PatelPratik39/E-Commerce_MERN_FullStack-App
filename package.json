@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend "
   },
   "repository": {
     "type": "git",
