@@ -73,9 +73,9 @@ dotenv.config();
 //       }
 //     });
 
-//     if (totalAmount >= 20000) {
-//       await createNewCoupon(req.user._id);
-//     }
+    // if (totalAmount >= 20000) {
+    //   await createNewCoupon(req.user._id);
+    // }
 //     console.log("🟢 Sending Checkout Session Response:", session);
 
 //     // res.json({ session });
@@ -171,6 +171,9 @@ export const createCheckoutSession = async (req, res) => {
         )
       }
     });
+    if (totalAmount >= 20000) {
+      await createNewCoupon(req.user._id);
+    }
 
     console.log("🟢 Checkout Session Created:", session);
 

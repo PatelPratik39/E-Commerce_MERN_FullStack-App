@@ -49,25 +49,27 @@ const AnalyticsTab = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <AnalyticsCard
             title="Total Users"
-            value={analyticsData.users.toLocaleString()}
+            value={(analyticsData.users ?? 0).toLocaleString()}
             icon={Users}
             color="from-emerald-500 to-teal-700"
           />
           <AnalyticsCard
             title="Total Products"
-            value={analyticsData.products.toLocaleString()}
+            value={(analyticsData.products ?? 0).toLocaleString()}
             icon={Package}
             color="from-emerald-500 to-green-700"
           />
+
           <AnalyticsCard
             title="Total Sales"
-            value={analyticsData.totalSales.toLocaleString()}
+            value={(analyticsData.totalSales ?? 0).toLocaleString()}
             icon={ShoppingCart}
             color="from-emerald-500 to-cyan-700"
           />
+
           <AnalyticsCard
             title="Total Revenue"
-            value={`$${analyticsData.totalRevenue.toLocaleString()}`}
+            value={`$${(analyticsData.totalRevenue ?? 0).toLocaleString()}`}
             icon={DollarSign}
             color="from-emerald-500 to-lime-700"
           />

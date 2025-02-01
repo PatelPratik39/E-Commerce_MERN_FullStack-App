@@ -23,3 +23,15 @@
 
 - Cancel Purchase Page
 ![image](./purchasCancel.png)
+
+- Coupon Generated
+![image](./CoupenGnerated.png)
+
+- Stripe Payment
+![image](./StripPayments.png)
+
+- Successful payment after discount subtraction
+![image](./SuccessfulPayment.png)
+
+- Analytics for Sales
+![image](./analytics.png)
