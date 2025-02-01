@@ -28,8 +28,8 @@ const axiosInstance = axios.create({
   baseURL:
     import.meta.env.MODE === "development"
       ? "http://localhost:5001/api"
-      : "api", // Explicit production backend URL
-  withCredentials: true, // Allow cookies
+      : "https://your-backend.onrender.com/api", // Explicit production backend URL
+  withCredentials: true // Allow cookies
 });
 
 console.log("Current Mode:", import.meta.env.MODE);

@@ -33,6 +33,8 @@ const GiftCouponCard = () => {
   };
 
   const handleRemoveCoupon = async () => {
+    console.log("Omg,,, I am Clicked!!!");
+    
     await removeCoupon(); // ✅ Removes coupon from the store
     setIsCouponApplied(false); // ✅ Reset coupon state
     setUserInputCode(""); // ✅ Clear input field
@@ -105,16 +107,17 @@ const GiftCouponCard = () => {
           </div>
         )}
 
-        {coupon && (
-          <div className="mt-4">
-            <h3 className="text-lg font-medium text-gray-300">
-              Your Available Coupon:
-            </h3>
-            <p className="mt-2 text-sm text-gray-400">
-              {coupon.code} - {coupon.discountPercentage}% off
-            </p>
-          </div>
-        )}
+        {isCouponApplied &&
+          coupon && (
+            <div className="mt-4">
+              <h3 className="text-lg font-medium text-gray-300">
+                Your Available Coupon:
+              </h3>
+              <p className="mt-2 text-sm text-gray-400">
+                {coupon.code} - {coupon.discountPercentage}% off
+              </p>
+            </div>
+          )}
       </motion.div>
     </>
   );
