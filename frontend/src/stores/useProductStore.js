@@ -34,7 +34,8 @@ export const useProductStore = create((set) => ({
     set({ loading: true });
     try {
       const response = await axios.get(`/products/category/${category}`);
-      console.log("API Response: ", response.data); // Debugging
+      console.log("🔍 API Response:", response);
+      console.log("✅ Products:", response.data);// Debugging
 
       if (!response.data || response.data.length === 0) {
         console.warn("No products found for this category.");

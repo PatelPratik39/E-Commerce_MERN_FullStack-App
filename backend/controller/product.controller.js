@@ -115,9 +115,16 @@ export const getRecommendedProducts = async (req, res) => {
 export const fetchProductsByCategory = async (req, res) => {
   // console.log("Category API Hit:", req.params.category);
   const category = req.params.category;
+  console.log("🔍 Fetching products for category:", category);
   try {
     const products = await Product.find({ category }); 
     console.log("Products Found:", products);
+    
+    if (!products.length) {
+      return res.status(404).json({ error: "No products found" });
+    }
+
+
     res.json({products})
     // console.log({ products });
   } catch (error) {
