@@ -177,6 +177,7 @@ export const createCheckoutSession = async (req, res) => {
       //     }))
       //   )
       // }
+      
     });
     if (totalAmount >= 20000) {
       await createNewCoupon(req.user._id);

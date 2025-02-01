@@ -9,6 +9,7 @@ export const useCartStore = create((set, get) => ({
   total: 0,
   subTotal: 0,
   isCouponApplied: false,
+  cartSubtotal: 0,
 
   // getCoupon
   getMyCoupon: async () => {

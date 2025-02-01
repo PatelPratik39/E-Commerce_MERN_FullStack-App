@@ -4,27 +4,40 @@ import { useCartStore } from "../stores/useCartStore";
 
 const GiftCouponCard = () => {
   const [userInputCode, setUserInputCode] = useState("");
-  const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
-    useCartStore();
+  const {
+    coupon,
+    isCouponApplied,
+    applyCoupon,
+    getMyCoupon,
+    removeCoupon,
+    setIsCouponApplied
+  } = useCartStore();
 
   useEffect(() => {
     getMyCoupon();
   }, [getMyCoupon]);
 
   useEffect(() => {
-    if (coupon) setUserInputCode(coupon.code);
+    if (coupon) {
+      setUserInputCode(coupon.code);
+    } else {
+      setUserInputCode("");
+    }
   }, [coupon]);
 
-  const handleApplyCoupon = () => {
+  const handleApplyCoupon = async() => {
     if (!userInputCode) return;
-    applyCoupon(userInputCode);
+    await applyCoupon(userInputCode);
+    setUserInputCode("");
     console.log("Applied Coupon");
   };
 
   const handleRemoveCoupon = async () => {
-    await removeCoupon();
-    setUserInputCode("");
-    console.log("removed Coupon");
+    await removeCoupon(); // ✅ Removes coupon from the store
+    setIsCouponApplied(false); // ✅ Reset coupon state
+    setUserInputCode(""); // ✅ Clear input field
+    updateCartSubtotal(); // ✅ Recalculate subtotal without coupon
+    console.log("❌ Removed Coupon & Updated Subtotal");
   };
 
   return (

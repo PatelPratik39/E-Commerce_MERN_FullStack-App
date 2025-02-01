@@ -18,13 +18,18 @@ console.log("Stripe Key:", stripePromise);
 // console.log(stripePromise);
 
 const OrderSummary = () => {
-  const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
+  const { total, subtotal, coupon, isCouponApplied, cart } =
+    useCartStore();
 
   // const { total, subtotal } = useCartStore();
   const formattedSubtotal = subtotal.toFixed(2);
   const savings = subtotal - total;
   const formattedTotal = total.toFixed(2);
   const formattedSavings = savings.toFixed(2);
+
+  // useEffect(() => {
+  //   console.log("🟢 Subtotal Updated:", cartSubtotal);
+  // }, [cartSubtotal]);
 
   const handlePayment = async () => {
     try {
@@ -75,6 +80,7 @@ const OrderSummary = () => {
       console.error("🔴 Error in handlePayment:", error);
     }
   };
+  
 
   return (
     <>
