@@ -2,7 +2,7 @@
 
 * upStash for redis :https://console.upstash.com/
 
-* Strip for payment : https://dashboard.stripe.com/test/dashboard
+* Stripe for payment : https://dashboard.stripe.com/test/dashboard
 
 - accessToken and refreshToken using Jwt
 ![image](./redis_tokens.png)
@@ -28,7 +28,7 @@
 ![image](./CoupenGnerated.png)
 
 - Stripe Payment
-![image](./StripPayments.png)
+![image](./StripPayment.png)
 
 - Successful payment after discount subtraction
 ![image](./SuccessfulPayment.png)
