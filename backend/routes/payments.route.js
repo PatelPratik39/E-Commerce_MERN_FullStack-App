@@ -8,7 +8,6 @@ import {
 const router = express.Router();
 
 router.post("/create-checkout-session", protectedRoute, createCheckoutSession);
-console.log("✅ Registering /api/payments routes...");
 // router.post("/checkout-success", protectedRoute);
 router.post("/checkout-success", protectedRoute, checkoutSuccess);
 

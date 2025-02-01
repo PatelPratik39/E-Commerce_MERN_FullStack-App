@@ -7,12 +7,23 @@ const GiftCouponCard = () => {
   const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
     useCartStore();
 
+  useEffect(() => {
+    getMyCoupon();
+  }, [getMyCoupon]);
+
+  useEffect(() => {
+    if (coupon) setUserInputCode(coupon.code);
+  }, [coupon]);
+
   const handleApplyCoupon = () => {
-    console.log(userInputCode);
+    if (!userInputCode) return;
+    applyCoupon(userInputCode);
     console.log("Applied Coupon");
   };
 
-  const handleRemoveCoupon = () => {
+  const handleRemoveCoupon = async () => {
+    await removeCoupon();
+    setUserInputCode("");
     console.log("removed Coupns");
   };
 
@@ -51,8 +62,9 @@ const GiftCouponCard = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleApplyCoupon}
+            disabled={isCouponApplied}
           >
-            Apply Code
+            {isCouponApplied ? "Coupon Applied" : "Apply Code"}
           </motion.button>
         </div>
         {isCouponApplied && coupon && (
@@ -73,6 +85,7 @@ const GiftCouponCard = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleRemoveCoupon}
+              disabled={isCouponApplied}
             >
               Remove Coupon
             </motion.button>
