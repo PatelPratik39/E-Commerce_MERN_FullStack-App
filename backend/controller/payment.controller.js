@@ -162,14 +162,21 @@ export const createCheckoutSession = async (req, res) => {
       metadata: {
         userId: req.user._id.toString(),
         couponCode: couponCode || "NO_COUPON",
-        products: JSON.stringify(
-          products.map((p) => ({
-            id: p._id,
-            quantity: p.quantity,
-            price: p.price
-          }))
-        )
+        productCount: products.length, // ✅ Only store the number of products
+        orderTotal: totalAmount / 100 // ✅ Only store the total amount (not all items)
       }
+
+      // metadata: {
+      //   userId: req.user._id.toString(),
+      //   couponCode: couponCode || "NO_COUPON",
+      //   products: JSON.stringify(
+      //     products.map((p) => ({
+      //       id: p._id,
+      //       quantity: p.quantity,
+      //       price: p.price
+      //     }))
+      //   )
+      // }
     });
     if (totalAmount >= 20000) {
       await createNewCoupon(req.user._id);
