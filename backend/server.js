@@ -16,6 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
+connectDB();
 
 // app.use(
 //   cors({
@@ -57,5 +58,5 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   console.log(`Server is up and Running on http://localhost:${PORT}`);
-  connectDB();
+  // connectDB();
 });

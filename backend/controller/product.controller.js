@@ -39,7 +39,7 @@ export const getFeaturedProducts = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const { name, description, price, image, category, isFeatured } = req.body;
+    const { name, description, price, image, category } = req.body;
     let cloudinaryResponse = null;
     if (image) {
       cloudinaryResponse = await cloudinary.uploader.upload(image, {
@@ -119,7 +119,7 @@ export const fetchProductsByCategory = async (req, res) => {
   try {
     const products = await Product.find({ category }); 
     console.log("Products Found:", products);
-    
+
     if (!products.length) {
       return res.status(404).json({ error: "No products found" });
     }
