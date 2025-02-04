@@ -1,5 +1,8 @@
 # E_Commerce_MERN_App
 
+
+Live Application : https://e-commerce-mern-fullstack-app.onrender.com/
+
 * upStash for redis :https://console.upstash.com/
 
 * Stripe for payment : https://dashboard.stripe.com/test/dashboard
